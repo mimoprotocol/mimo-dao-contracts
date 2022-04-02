@@ -1,0 +1,17 @@
+reports:
+  exclude_paths:
+    - contracts/testing/*.*
+
+dev_deployment_artifacts: True
+dotenv: .env
+
+networks:
+  development:
+    cmd_settings:
+      accounts: 100
+  iotex_testnet:
+    gas_price: auto
+  iotex:
+    gas_price: auto
+wallets:
+  from_key: ${PRIVATE_KEY}
