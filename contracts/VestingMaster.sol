@@ -155,7 +155,7 @@ contract VestingMaster is IVestingMaster, ReentrancyGuard, Ownable {
         }
     }
 
-    function remiveLocker(address locker) external onlyOwner {
+    function removeLocker(address locker) external onlyOwner {
         if (lockers.contains(locker)) {
             lockers.remove(locker);
             emit LockerRemoved(locker);
