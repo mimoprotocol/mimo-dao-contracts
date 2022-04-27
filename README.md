@@ -1,7 +1,9 @@
 mimo dao contracts
 ==================
 
-Vyper contracts used in the MIMO Governance DAO (based on Curve DAO).
+Smart contracts used in the MIMO Governance DAO.
+
+It is a vyper implementaion based on Curve DAO contracts.
 
 ## Overview
 
