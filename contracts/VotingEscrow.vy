@@ -56,6 +56,9 @@ event CommitOwnership:
 event ApplyOwnership:
     admin: address
 
+event SetMigrator:
+    migrate: address
+
 event Deposit:
     provider: indexed(address)
     value: uint256
@@ -371,7 +374,7 @@ def deposit_for(_addr: address, _value: uint256, _wallet: address = ZERO_ADDRESS
     if _wallet == ZERO_ADDRESS:
         self._deposit_for(_addr, _addr, _value, 0, self.locked[_addr], DEPOSIT_FOR_TYPE)
     else:
-        assert _wallet == msg.sender, "Only owner can deposit for others"
+        assert _wallet == msg.sender, "Only wallet owner can deposit for others"
         self._deposit_for(_wallet, _addr, _value, 0, self.locked[_addr], DEPOSIT_FOR_TYPE)
 
 
@@ -507,6 +510,17 @@ def migrate(_addr: address) -> uint256:
     log Migrate(_addr, value)
     log Supply(supply_before, supply_before - value)
     return value
+
+
+@external
+def set_migrator(addr: address):
+    """
+    @notice Set set_migrator to `addr`
+    @param addr Address migrator
+    """
+    assert msg.sender == self.admin  # dev: admin only
+    self.migrator = addr
+    log SetMigrator(addr)
 
 
 # The following ERC20/minime-compatible methods are not real balanceOf and supply!
